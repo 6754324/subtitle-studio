@@ -4,7 +4,7 @@ import { formatTimestamp, parseTimestamp } from '../engine/time'
 import type { Cue } from '../types'
 
 const timeCls =
-  'w-28 rounded border border-transparent bg-transparent px-1.5 py-1 font-mono text-xs text-zinc-300 outline-none transition hover:border-white/10 focus:border-brand-500/60 focus:bg-ink-800'
+  'w-28 rounded border border-transparent bg-transparent px-1.5 py-1 font-mono text-xs text-ink-600 outline-none transition hover:border-ink-200 focus:border-brand-500/60 focus:bg-paper-200'
 
 const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: number; total: number }) {
   const selected = useSubtitleStore((s) => s.selectedCueId === cue.id)
@@ -34,15 +34,15 @@ const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: nu
   return (
     <div
       onClick={() => selectCue(cue.id)}
-      className={`group flex items-start gap-2 border-b border-white/5 px-3 py-2 transition ${
-        selected ? 'bg-brand-500/5' : 'hover:bg-white/[0.02]'
+      className={`group flex items-start gap-2 border-b border-ink-200/70 px-3 py-2 transition ${
+        selected ? 'bg-brand-500/5' : 'hover:bg-ink-900/[0.02]'
       }`}
     >
-      <span className="mt-1.5 w-8 shrink-0 text-right font-mono text-xs text-zinc-600">{index + 1}</span>
+      <span className="mt-1.5 w-8 shrink-0 text-right font-mono text-xs text-ink-400">{index + 1}</span>
       <input className={timeCls} value={startText} onChange={(e) => setStartText(e.target.value)} onBlur={commitStart} />
       <input className={timeCls} value={endText} onChange={(e) => setEndText(e.target.value)} onBlur={commitEnd} />
       <textarea
-        className="min-h-[2.25rem] flex-1 resize-y rounded border border-transparent bg-transparent px-1.5 py-1 text-sm leading-relaxed text-zinc-200 outline-none transition hover:border-white/10 focus:border-brand-500/60 focus:bg-ink-800"
+        className="min-h-[2.25rem] flex-1 resize-y rounded border border-transparent bg-transparent px-1.5 py-1 text-sm leading-relaxed text-ink-700 outline-none transition hover:border-ink-200 focus:border-brand-500/60 focus:bg-paper-200"
         value={cue.text}
         onChange={(e) => updateCue(cue.id, { text: e.target.value })}
         rows={cue.text.includes('\n') ? 2 : 1}
@@ -54,7 +54,7 @@ const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: nu
             moveCue(cue.id, -1)
           }}
           disabled={index === 0}
-          className="rounded px-1 text-zinc-500 hover:text-white disabled:opacity-30"
+          className="rounded px-1 text-ink-400 hover:text-ink-900 disabled:opacity-30"
           title="上移"
         >
           ↑
@@ -65,7 +65,7 @@ const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: nu
             moveCue(cue.id, 1)
           }}
           disabled={index === total - 1}
-          className="rounded px-1 text-zinc-500 hover:text-white disabled:opacity-30"
+          className="rounded px-1 text-ink-400 hover:text-ink-900 disabled:opacity-30"
           title="下移"
         >
           ↓
@@ -75,7 +75,7 @@ const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: nu
             e.stopPropagation()
             addCue(cue.id)
           }}
-          className="rounded px-1 text-zinc-500 hover:text-accent-300"
+          className="rounded px-1 text-ink-400 hover:text-accent-600"
           title="在此后插入"
         >
           ＋
@@ -85,7 +85,7 @@ const CueRow = memo(function CueRow({ cue, index, total }: { cue: Cue; index: nu
             e.stopPropagation()
             removeCue(cue.id)
           }}
-          className="rounded px-1 text-zinc-600 hover:text-rose-400"
+          className="rounded px-1 text-ink-400 hover:text-rose-600"
           title="删除"
         >
           ✕
@@ -101,7 +101,7 @@ export function CueTable() {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center border-b border-white/10 px-3 py-2 text-xs text-zinc-500">
+      <div className="flex items-center border-b border-ink-200 px-3 py-2 text-xs text-ink-400">
         <span className="w-8 shrink-0 text-right">#</span>
         <span className="w-28 shrink-0 px-1.5">开始</span>
         <span className="w-28 shrink-0 px-1.5">结束</span>
@@ -112,15 +112,15 @@ export function CueTable() {
           <CueRow key={cue.id} cue={cue} index={i} total={cues.length} />
         ))}
         {cues.length === 0 && (
-          <div className="px-4 py-16 text-center text-sm text-zinc-600">
+          <div className="px-4 py-16 text-center text-sm text-ink-400">
             还没有字幕 — 「载入示例」或「导入 SRT」
           </div>
         )}
       </div>
-      <div className="border-t border-white/10 p-2">
+      <div className="border-t border-ink-200 p-2">
         <button
           onClick={() => addCue(null)}
-          className="w-full rounded-md border border-dashed border-white/15 px-3 py-2 text-sm text-zinc-500 transition hover:border-white/30 hover:text-zinc-300"
+          className="w-full rounded-md border border-dashed border-ink-200 px-3 py-2 text-sm text-ink-400 transition hover:border-ink-300 hover:text-ink-600"
         >
           + 添加字幕
         </button>

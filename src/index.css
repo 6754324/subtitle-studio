@@ -1,53 +1,73 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand — studio violet */
-  --color-brand-50: #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
-  --color-brand-400: #a78bfa;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
+  --color-paper-50: #fcf8f0;
+  --color-paper-100: #f7f1e5;
+  --color-paper-200: #efe5d3;
+  --color-paper-300: #e4d6be;
 
-  /* Accent — signal cyan */
-  --color-accent-300: #67e8f9;
-  --color-accent-400: #22d3ee;
-  --color-accent-500: #06b6d4;
-  --color-accent-600: #0891b2;
+  --color-ink-950: #1c1812;
+  --color-ink-900: #26211a;
+  --color-ink-800: #322c23;
+  --color-ink-700: #423a2f;
+  --color-ink-600: #574e41;
+  --color-ink-500: #6d6352;
+  --color-ink-400: #8c8170;
+  --color-ink-300: #b0a58f;
+  --color-ink-200: #d6ccb8;
+  --color-ink-100: #e7dfcd;
 
-  /* Ink — dark studio surfaces */
-  --color-ink-950: #07070a;
-  --color-ink-900: #0d0d12;
-  --color-ink-850: #12121a;
-  --color-ink-800: #181822;
-  --color-ink-700: #23232f;
+  --color-brand-50: #fbf1ee;
+  --color-brand-100: #f6dfd9;
+  --color-brand-200: #edbdb4;
+  --color-brand-300: #e1978b;
+  --color-brand-400: #d47566;
+  --color-brand-500: #c05a48;
+  --color-brand-600: #a8432f;
+  --color-brand-700: #8a3526;
+  --color-brand-800: #6d2b20;
+  --color-brand-900: #4f2018;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-accent-100: #dbe6ee;
+  --color-accent-200: #b8cedd;
+  --color-accent-300: #8fb3c9;
+  --color-accent-400: #6a95ad;
+  --color-accent-500: #4a7c99;
+  --color-accent-600: #3a657f;
+  --color-accent-700: #2e5267;
+
+  --color-jade-300: #a3c4b2;
+  --color-jade-400: #7aab90;
+  --color-jade-500: #5d9076;
+  --color-jade-600: #487a60;
+
+  --color-gold-300: #dcc27c;
+  --color-gold-400: #c9a24a;
+  --color-gold-500: #b8912f;
+  --color-gold-600: #9a7723;
+
+  --font-display: "Ma Shan Zheng", "Kaiti SC", "KaiTi", "STKaiti", "Noto Serif CJK SC", serif;
+  --font-sans: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "SimSun", "Microsoft YaHei", serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 @layer base {
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-ink-950 text-zinc-300 antialiased;
+    @apply bg-paper-50 text-ink-600 antialiased;
   }
 
   ::selection {
-    @apply bg-brand-500/30 text-white;
+    @apply bg-brand-500/20 text-brand-800;
   }
 }
 
 @utility bg-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(to right, rgba(28, 24, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 24, 18, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
 }

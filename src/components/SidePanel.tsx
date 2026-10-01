@@ -9,14 +9,14 @@ import { LANGUAGES } from '../data/demo'
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="space-y-2">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">{title}</h2>
+      <h2 className="text-xs font-semibold uppercase tracking-wider text-ink-400">{title}</h2>
       {children}
     </section>
   )
 }
 
 const fieldCls =
-  'w-full rounded-md border border-white/10 bg-ink-800 px-2.5 py-1.5 text-sm text-zinc-100 outline-none focus:border-brand-500/60'
+  'w-full rounded-md border border-ink-200 bg-paper-200 px-2.5 py-1.5 text-sm text-ink-900 outline-none focus:border-brand-500/60'
 
 export function SidePanel() {
   const cues = useSubtitleStore((s) => s.cues)
@@ -52,12 +52,12 @@ export function SidePanel() {
     <div className="space-y-6">
       <Section title="时间轴操作">
         <div>
-          <label className="mb-1 block text-[11px] text-zinc-500">整体平移（毫秒，可负）</label>
+          <label className="mb-1 block text-[11px] text-ink-400">整体平移（毫秒，可负）</label>
           <div className="flex gap-1.5">
             <input className={fieldCls} value={shiftValue} onChange={(e) => setShiftValue(e.target.value)} />
             <button
               onClick={() => applyShift(Number(shiftValue) || 0)}
-              className="shrink-0 rounded-md bg-ink-700 px-3 text-sm text-zinc-200 transition hover:bg-ink-700/70"
+              className="shrink-0 rounded-md bg-paper-200 px-3 text-sm text-ink-700 transition hover:bg-paper-200/70"
             >
               应用
             </button>
@@ -67,7 +67,7 @@ export function SidePanel() {
               <button
                 key={d}
                 onClick={() => applyShift(d)}
-                className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-zinc-400 transition hover:text-white"
+                className="rounded border border-ink-200 px-2 py-0.5 text-[11px] text-ink-500 transition hover:text-ink-900"
               >
                 {d > 0 ? `+${d}` : d}ms
               </button>
@@ -75,24 +75,24 @@ export function SidePanel() {
           </div>
         </div>
         <div>
-          <label className="mb-1 block text-[11px] text-zinc-500">合并近邻（间隔 ≤ 毫秒）</label>
+          <label className="mb-1 block text-[11px] text-ink-400">合并近邻（间隔 ≤ 毫秒）</label>
           <div className="flex gap-1.5">
             <input className={fieldCls} value={mergeValue} onChange={(e) => setMergeValue(e.target.value)} />
             <button
               onClick={() => applyMerge(Number(mergeValue) || 0)}
-              className="shrink-0 rounded-md bg-ink-700 px-3 text-sm text-zinc-200 transition hover:bg-ink-700/70"
+              className="shrink-0 rounded-md bg-paper-200 px-3 text-sm text-ink-700 transition hover:bg-paper-200/70"
             >
               合并
             </button>
           </div>
         </div>
         <div>
-          <label className="mb-1 block text-[11px] text-zinc-500">拆分长句（超过 字）</label>
+          <label className="mb-1 block text-[11px] text-ink-400">拆分长句（超过 字）</label>
           <div className="flex gap-1.5">
             <input className={fieldCls} value={splitValue} onChange={(e) => setSplitValue(e.target.value)} />
             <button
               onClick={() => applySplit(Number(splitValue) || 20)}
-              className="shrink-0 rounded-md bg-ink-700 px-3 text-sm text-zinc-200 transition hover:bg-ink-700/70"
+              className="shrink-0 rounded-md bg-paper-200 px-3 text-sm text-ink-700 transition hover:bg-paper-200/70"
             >
               拆分
             </button>
@@ -122,11 +122,11 @@ export function SidePanel() {
         <button
           onClick={onTranslate}
           disabled={translating || cues.length === 0}
-          className="w-full rounded-md bg-accent-600 px-3 py-2 text-sm font-medium text-ink-950 transition hover:bg-accent-500 disabled:opacity-50"
+          className="w-full rounded-md bg-accent-600 px-3 py-2 text-sm font-medium text-paper-50 transition hover:bg-accent-500 disabled:opacity-50"
         >
           {translating ? '翻译中…' : `✨ 翻译为${targetLang}`}
         </button>
-        <p className="text-[11px] leading-relaxed text-zinc-600">
+        <p className="text-[11px] leading-relaxed text-ink-400">
           {translateSource === 'api' && '已用 AI 模型逐条翻译。'}
           {translateSource === 'demo' && '未配置 Key，示例模式未改动字幕（可离线体验）。'}
           {!translateSource && '未配置 Key 时使用内置示例，配置后走 DeepSeek 实时翻译。'}
@@ -135,16 +135,16 @@ export function SidePanel() {
 
       <Section title="质量检查">
         {overlaps.length === 0 && speedIssues.length === 0 ? (
-          <p className="text-[11px] text-emerald-400">✓ 未发现时间轴或语速问题</p>
+          <p className="text-[11px] text-emerald-600">✓ 未发现时间轴或语速问题</p>
         ) : (
           <ul className="space-y-1.5">
             {overlaps.map((o, i) => (
-              <li key={`o-${i}`} className="rounded-md border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5 text-[11px] text-rose-300">
+              <li key={`o-${i}`} className="rounded-md border border-rose-500/30 bg-rose-500/10 px-2.5 py-1.5 text-[11px] text-rose-700">
                 第 {o.index + 1} 条：{o.message}
               </li>
             ))}
             {speedIssues.map((s, i) => (
-              <li key={`s-${i}`} className="rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-[11px] text-amber-300">
+              <li key={`s-${i}`} className="rounded-md border border-amber-500/30 bg-amber-500/10 px-2.5 py-1.5 text-[11px] text-amber-700">
                 第 {s.index + 1} 条语速过快（{s.cps.toFixed(1)} 字/秒）
               </li>
             ))}
@@ -154,16 +154,16 @@ export function SidePanel() {
 
       <Section title="统计">
         <div className="grid grid-cols-2 gap-1.5 text-center text-xs">
-          <div className="rounded-md bg-white/5 px-1 py-2">
-            <div className="font-mono text-base text-white">{stats.count}</div>
-            <div className="text-zinc-500">条字幕</div>
+          <div className="rounded-md bg-ink-900/5 px-1 py-2">
+            <div className="font-mono text-base text-ink-900">{stats.count}</div>
+            <div className="text-ink-400">条字幕</div>
           </div>
-          <div className="rounded-md bg-white/5 px-1 py-2">
-            <div className="font-mono text-base text-white">{stats.totalChars}</div>
-            <div className="text-zinc-500">总字数</div>
+          <div className="rounded-md bg-ink-900/5 px-1 py-2">
+            <div className="font-mono text-base text-ink-900">{stats.totalChars}</div>
+            <div className="text-ink-400">总字数</div>
           </div>
         </div>
-        <div className="rounded-md bg-white/5 px-3 py-2 font-mono text-xs text-zinc-400">
+        <div className="rounded-md bg-ink-900/5 px-3 py-2 font-mono text-xs text-ink-500">
           总时长 {formatTimestamp(stats.totalDuration)}
           <br />
           平均 {stats.count ? (stats.avgDuration / 1000).toFixed(1) : '0.0'} 秒 / 条
